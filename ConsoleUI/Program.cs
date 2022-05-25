@@ -12,6 +12,8 @@ namespace ConsoleUI
             InMemoryCarDal inMemoryCarDal = new InMemoryCarDal();
             ICarManager carManager = new ICarManager(inMemoryCarDal);
 
+            //TEST
+
             while (true)
             {
                 Console.WriteLine("\nİşlem Giriniz");

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using Business.Abstract;
 using DataAccess.Abstract;
@@ -18,9 +19,10 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public Car GetById(int id)
+
+        public Car Get(int id)
         {
-            return _carDal.GetById(id);
+            return _carDal.Get(c => c.CarId == id);
         }
 
         public List<Car> GetAll()
@@ -28,9 +30,20 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
+        public List<Car> GetCarsByBrandId(int brandId)
+        {
+            return _carDal.GetAll(c => c.BrandId == brandId);
+        }
+
+        public List<Car> GetCarsByColorId(int colorId)
+        {
+            return _carDal.GetAll(c => c.ColorId == colorId);
+        }
+
         public void Add(Car car)
         {
             _carDal.Add(car);
+            Console.WriteLine("CarAdded");
         }
 
         public void Update(Car car)
@@ -40,7 +53,7 @@ namespace Business.Concrete
 
         public void Delete(int carId)
         {
-           _carDal.Delete(carId);
+            //
         }
     }
 }

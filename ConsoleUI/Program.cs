@@ -1,6 +1,7 @@
 ﻿using System;
 using Business.Concrete;
-using DataAccess.Concrete.InMemory;
+using DataAccess.Concrete.EntityFramework;
+
 using Entities.Concrete;
 
 namespace ConsoleUI
@@ -9,56 +10,24 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            InMemoryCarDal inMemoryCarDal = new InMemoryCarDal();
-            ICarManager carManager = new ICarManager(inMemoryCarDal);
+            //InMemoryCarDal inMemoryCarDal = new InMemoryCarDal();
+            EfCarDal efCarDal = new EfCarDal();
+            ICarManager carManager = new ICarManager(efCarDal);
 
-            //TEST
+            EfBrandDal brandDal = new EfBrandDal();
+            IBrandManager brandManager = new IBrandManager(brandDal);
 
-            while (true)
+            EfColorDal colorDal = new EfColorDal();
+            IColorManager colorManager = new IColorManager(colorDal);
+
+            foreach (var brand in brandManager.GetAll())
             {
-                Console.WriteLine("\nİşlem Giriniz");
-                string input = Console.ReadLine();
-                if (input == "get")
-                {
-                    Console.WriteLine("Car Id giriniz : ");
-                    string carIdInput = Console.ReadLine(); 
-                    int carId = int.Parse(carIdInput);
-                    Car car = carManager.GetById(carId);
-                    if (car == null)
-                    {
-                        Console.WriteLine("Böyle bir araç bulunamadı ");
-                    }
-                    else
-                    {
-                        Console.WriteLine(car.Description);
-                    }
+                Console.WriteLine(brand.BrandName);
+            }
 
-                    
-                }else if (input == "getall")
-                {
-                    foreach (Car car in carManager.GetAll())
-                    {
-                        Console.WriteLine(car.Description);
-                    }
-                }else if (input == "update")
-                {
-                    Console.WriteLine("Car Id giriniz : ");
-                    string carIdInput = Console.ReadLine();
-                    int carId = int.Parse(carIdInput);
-
-                }
-                else if (input == "delete")
-                {
-                    Console.WriteLine("Car Id giriniz : ");
-                    string carIdInput = Console.ReadLine();
-                    int carId = int.Parse(carIdInput);
-                    carManager.Delete(carId);
-
-                }
-                else
-                {
-                    Console.WriteLine("**************************");
-                }
+            foreach (var color in colorManager.GetAll())
+            {
+                Console.WriteLine(color.ColorName);
             }
         }
     }

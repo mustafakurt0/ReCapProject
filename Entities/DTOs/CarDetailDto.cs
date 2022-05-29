@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Entities;
 
-namespace Entities.Concrete
+namespace Entities.DTOs
 {
-    public class Brand : IEntity
+    public class CarDetailDto : IDto
     {
-        public int BrandId { get; set; }
+        public string CarName { get; set; }
         public string BrandName { get; set; }
+        public string ColorName { get; set; }
+        public decimal DailyPrice { get; set; }
 
     }
 }

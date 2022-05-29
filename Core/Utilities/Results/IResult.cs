@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core.DataAccess;
-using Entities.Concrete;
 
-namespace DataAccess.Abstract
+namespace Core.Utilities.Results
 {
-    public interface IColorDal : IEntityRepository<Color>
+    public interface IResult
     {
+        bool Success { get; }
+        string Message { get; }
     }
 }

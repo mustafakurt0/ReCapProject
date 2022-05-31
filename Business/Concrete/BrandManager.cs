@@ -38,11 +38,14 @@ namespace Business.Concrete
 
         public IResult Update(Brand brand)
         {
+            
+            _brandDal.Update(brand);
             return new SuccessResult();
         }
 
-        public IResult Delete(int brandId)
+        public IResult Delete(Brand brand)
         {
+            _brandDal.Delete(brand);
             return new SuccessResult();
         }
     }

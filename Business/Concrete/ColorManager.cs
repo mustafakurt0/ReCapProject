@@ -41,8 +41,9 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IResult Delete(int colorId)
+        public IResult Delete(Color color)
         {
+            _colorDal.Delete(color);
             return new SuccessResult();
         }
     }

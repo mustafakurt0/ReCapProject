@@ -54,7 +54,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IResult Delete(int carId)
+        public IResult Delete(Car car)
         {
             return new SuccessResult();
         }

@@ -13,10 +13,12 @@ namespace Business.Concrete
     public class RentalManager : IRentalService
     {
         private IRentalDal _rental;
+        private ICarDal _carDal;
 
-        public RentalManager(IRentalDal rental)
+        public RentalManager(IRentalDal rental, ICarDal carDal)
         {
             _rental = rental;
+            _carDal = carDal;
         }
 
         public IDataResult<Rental> Get(int id)
@@ -31,7 +33,13 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-           _rental.Add(rental);
+            Car car = _carDal.Get(r => r.CarId == rental.CarId);
+            if (car.CarStatusId != 5)
+            {
+                return new ErrorResult("Araç Kullanımda");
+            }
+
+            _rental.Add(rental);
            return new SuccessResult();
 
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Entities.Concrete;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,12 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Rental> Rentals { get; set; }
         public DbSet<CarStatus> CarStates { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,9 +40,11 @@ namespace DataAccess.Concrete.EntityFramework
             modelBuilder.Entity<Customer>().ToTable("Customers").HasNoKey();
             modelBuilder.Entity<Rental>().ToTable("Rentals");
             modelBuilder.Entity<CarStatus>().ToTable("CarStates");
+            modelBuilder.Entity<CarImage>().ToTable("CarImages");
 
 
             modelBuilder.Entity<Car>().Property(p => p.CarId).HasColumnName("Id");
+            modelBuilder.Entity<Car>().Property(p => p.Name).HasColumnName("Name");
             modelBuilder.Entity<Car>().Property(p => p.BrandId).HasColumnName("BrandID");
             modelBuilder.Entity<Car>().Property(p => p.ColorId).HasColumnName("ColorId");
             modelBuilder.Entity<Car>().Property(p => p.CarStatusId).HasColumnName("CarStatusId");
@@ -49,11 +58,12 @@ namespace DataAccess.Concrete.EntityFramework
             modelBuilder.Entity<Brand>().Property(p => p.BrandId).HasColumnName("Id");
             modelBuilder.Entity<Brand>().Property(p => p.BrandName).HasColumnName("Name");
 
-            modelBuilder.Entity<User>().Property(p => p.UserId).HasColumnName("Id");
+            modelBuilder.Entity<User>().Property(p => p.Id).HasColumnName("Id");
             modelBuilder.Entity<User>().Property(p => p.FirstName).HasColumnName("FirstName");
             modelBuilder.Entity<User>().Property(p => p.LastName).HasColumnName("LastName");
             modelBuilder.Entity<User>().Property(p => p.Email).HasColumnName("Email");
-            modelBuilder.Entity<User>().Property(p => p.Password).HasColumnName("Password");
+            modelBuilder.Entity<User>().Property(p => p.PasswordHash).HasColumnName("PasswordHash");
+            modelBuilder.Entity<User>().Property(p => p.PasswordSalt).HasColumnName("PasswordSalt");
 
             modelBuilder.Entity<Customer>().Property(p => p.UserId).HasColumnName("UserId");
             modelBuilder.Entity<Customer>().Property(p => p.CompanyName).HasColumnName("CompanyName");
@@ -66,6 +76,11 @@ namespace DataAccess.Concrete.EntityFramework
 
             modelBuilder.Entity<CarStatus>().Property(p => p.Id).HasColumnName("Id");
             modelBuilder.Entity<CarStatus>().Property(p => p.Status).HasColumnName("Status");
+
+            modelBuilder.Entity<CarImage>().Property(p=>p.Id).HasColumnName("Id");
+            modelBuilder.Entity<CarImage>().Property(p => p.CarId).HasColumnName("CarId");
+            modelBuilder.Entity<CarImage>().Property(p => p.ImagePath).HasColumnName("ImagePath");
+            modelBuilder.Entity<CarImage>().Property(p => p.Date).HasColumnName("Date");
         }
     }
 }

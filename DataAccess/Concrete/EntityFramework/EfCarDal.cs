@@ -24,7 +24,7 @@ namespace DataAccess.Concrete.EntityFramework
                     join carStatus in context.CarStates on car.CarStatusId equals carStatus.Id
                     select new CarDetailDto
                     {
-                        CarName = car.Description, BrandName = brand.BrandName, ColorName = color.ColorName,
+                        CarName = car.Name, BrandName = brand.BrandName, ColorName = color.ColorName,
                         CarStatus = carStatus.Status,
                         DailyPrice = car.DailyPrice
                     };

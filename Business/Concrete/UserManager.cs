@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -21,7 +22,7 @@ namespace Business.Concrete
 
         public IDataResult<User> Get(int id)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == id));
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id));
         }
 
         public IDataResult<List<User>> GetAll()
@@ -45,6 +46,23 @@ namespace Business.Concrete
         {
             _userDal.Delete(user);
             return new SuccessResult();
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            var result = _userDal.GetClaims(user);
+            return new SuccessDataResult<List<OperationClaim>>(result);
+        }
+
+        public IDataResult<User> GetByMail(string email)
+        {
+            var result = _userDal.Get(u => u.Email == email);
+            if (result == null)
+            {
+                return new ErrorDataResult<User>();
+            }
+
+            return new SuccessDataResult<User>(result);
         }
     }
 }

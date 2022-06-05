@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,12 +20,13 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-
+       
         public IDataResult<Brand> Get(int id)
         {
             return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == id));
         }
 
+      
         public IDataResult<List<Brand>> GetAll()
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());

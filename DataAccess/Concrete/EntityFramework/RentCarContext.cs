@@ -41,7 +41,8 @@ namespace DataAccess.Concrete.EntityFramework
             modelBuilder.Entity<Rental>().ToTable("Rentals");
             modelBuilder.Entity<CarStatus>().ToTable("CarStates");
             modelBuilder.Entity<CarImage>().ToTable("CarImages");
-
+            modelBuilder.Entity<OperationClaim>().ToTable("OperationClaims");
+            modelBuilder.Entity<UserOperationClaim>().ToTable("UserOperationClaims");
 
             modelBuilder.Entity<Car>().Property(p => p.CarId).HasColumnName("Id");
             modelBuilder.Entity<Car>().Property(p => p.Name).HasColumnName("Name");
@@ -81,6 +82,14 @@ namespace DataAccess.Concrete.EntityFramework
             modelBuilder.Entity<CarImage>().Property(p => p.CarId).HasColumnName("CarId");
             modelBuilder.Entity<CarImage>().Property(p => p.ImagePath).HasColumnName("ImagePath");
             modelBuilder.Entity<CarImage>().Property(p => p.Date).HasColumnName("Date");
+
+            modelBuilder.Entity<OperationClaim>().Property(p => p.Id).HasColumnName("Id");
+            modelBuilder.Entity<OperationClaim>().Property(p => p.Name).HasColumnName("Name");
+
+            modelBuilder.Entity<UserOperationClaim>().Property(p => p.Id).HasColumnName("Id");
+            modelBuilder.Entity<UserOperationClaim>().Property(p => p.UserId).HasColumnName("UserId");
+            modelBuilder.Entity<UserOperationClaim>().Property(p => p.OperationClaimId).HasColumnName("OperationClaimId");
+
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -24,6 +25,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == id));
         }
 
+        [SecuredOperation("admin")]
         public IDataResult<List<Color>> GetAll()
         {
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll());

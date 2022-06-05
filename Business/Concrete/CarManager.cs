@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -42,6 +43,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
         }
 
+        [SecuredOperation("admin,car.add")]
         public IResult Add(Car car)
         {
             _carDal.Add(car);

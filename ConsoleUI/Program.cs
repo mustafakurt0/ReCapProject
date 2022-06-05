@@ -2,7 +2,6 @@
 using Business.Concrete;
 using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
-
 using Entities.Concrete;
 
 namespace ConsoleUI
@@ -11,6 +10,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+           
         }
     }
 }

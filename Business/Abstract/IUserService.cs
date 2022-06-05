@@ -9,7 +9,7 @@ using Entities.Concrete;
 
 namespace Business.Abstract
 {
-    internal interface IUserService
+    public interface IUserService
     {
         IDataResult<User> Get(int id);
         IDataResult<List<User>> GetAll();

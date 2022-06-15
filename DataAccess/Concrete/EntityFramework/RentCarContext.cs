@@ -45,7 +45,7 @@ namespace DataAccess.Concrete.EntityFramework
             modelBuilder.Entity<UserOperationClaim>().ToTable("UserOperationClaims");
 
             modelBuilder.Entity<Car>().Property(p => p.CarId).HasColumnName("Id");
-            modelBuilder.Entity<Car>().Property(p => p.Name).HasColumnName("Name");
+            modelBuilder.Entity<Car>().Property(p => p.CarName).HasColumnName("Name");
             modelBuilder.Entity<Car>().Property(p => p.BrandId).HasColumnName("BrandID");
             modelBuilder.Entity<Car>().Property(p => p.ColorId).HasColumnName("ColorId");
             modelBuilder.Entity<Car>().Property(p => p.CarStatusId).HasColumnName("CarStatusId");
